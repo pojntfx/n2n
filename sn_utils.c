@@ -635,7 +635,7 @@ extern int process_udp(n2n_sn_t *sss,
 
 /** Long lived processing entry point. Split out from main to simply
  *  daemonisation on some platforms. */
-extern int run_loop(n2n_sn_t *sss, int *keep_running)
+extern int run_sn_loop(n2n_sn_t *sss, int *keep_running)
 {
     uint8_t pktbuf[N2N_SN_PKTBUF_SIZE];
     time_t last_purge_edges = 0;

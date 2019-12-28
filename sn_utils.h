@@ -77,6 +77,6 @@ extern int process_udp(n2n_sn_t *sss,
                        size_t udp_size,
                        time_t now);
 
-extern int run_loop(n2n_sn_t *sss, int *keep_running);
+extern int run_sn_loop(n2n_sn_t *sss, int *keep_running);
 
 #endif //N2N_SN_UTILS_H

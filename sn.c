@@ -427,5 +427,5 @@ int main(int argc, char *const argv[])
 #endif
 
     keep_running = 1;
-    return run_loop(&sss_node, keep_running);
+    return run_sn_loop(&sss_node, &keep_running);
 }
