@@ -1,5 +1,45 @@
 #include "n2n.h"
-#include "sn_utils.h"
+
+#define HASH_FIND_COMMUNITY(head, name, out) HASH_FIND_STR(head, name, out)
+#define N2N_SN_LPORT_DEFAULT 7654
+#define N2N_SN_PKTBUF_SIZE 2048
+
+extern int try_forward(n2n_sn_t *sss,
+                       const n2n_common_t *cmn,
+                       const n2n_mac_t dstMac,
+                       const uint8_t *pktbuf,
+                       size_t pktsize);
+
+extern ssize_t sendto_sock(n2n_sn_t *sss,
+                           const n2n_sock_t *sock,
+                           const uint8_t *pktbuf,
+                           size_t pktsize);
+
+extern int try_broadcast(n2n_sn_t *sss,
+                         const n2n_common_t *cmn,
+                         const n2n_mac_t srcMac,
+                         const uint8_t *pktbuf,
+                         size_t pktsize);
+
+extern uint16_t reg_lifetime(n2n_sn_t *sss);
+
+extern int update_edge(n2n_sn_t *sss,
+                       const n2n_mac_t edgeMac,
+                       struct sn_community *comm,
+                       const n2n_sock_t *sender_sock,
+                       time_t now);
+
+extern int process_mgmt(n2n_sn_t *sss,
+                        const struct sockaddr_in *sender_sock,
+                        const uint8_t *mgmt_buf,
+                        size_t mgmt_size,
+                        time_t now);
+
+extern int process_udp(n2n_sn_t *sss,
+                       const struct sockaddr_in *sender_sock,
+                       const uint8_t *udp_buf,
+                       size_t udp_size,
+                       time_t now);
 
 extern int try_forward(n2n_sn_t *sss,
                        const n2n_common_t *cmn,
@@ -149,7 +189,7 @@ extern int try_broadcast(n2n_sn_t *sss,
 }
 
 /** Initialise the supernode structure */
-extern int init_sn(n2n_sn_t *sss)
+extern int sn_init(n2n_sn_t *sss)
 {
 #ifdef WIN32
     initWin32();
@@ -166,7 +206,7 @@ extern int init_sn(n2n_sn_t *sss)
 
 /** Deinitialise the supernode structure and deallocate any memory owned by
  *  it. */
-extern void deinit_sn(n2n_sn_t *sss)
+extern void sn_term(n2n_sn_t *sss)
 {
     struct sn_community *community, *tmp;
 
@@ -738,7 +778,7 @@ extern int run_sn_loop(n2n_sn_t *sss, int *keep_running)
 
     } /* while */
 
-    deinit_sn(sss);
+    sn_term(sss);
 
     return 0;
 }

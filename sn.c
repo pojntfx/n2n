@@ -19,7 +19,6 @@
 /* Supernode for n2n-2.x */
 
 #include "n2n.h"
-#include "sn_utils.h"
 
 #ifdef WIN32
 #include <signal.h>
@@ -354,7 +353,7 @@ int main(int argc, char *const argv[])
 {
     int rc;
 
-    init_sn(&sss_node);
+    sn_init(&sss_node);
 
     if ((argc >= 2) && (argv[1][0] != '-'))
     {
