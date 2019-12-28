@@ -54,6 +54,7 @@ endif()
 # Add SHARED to build DLL
 add_library(n2n n2n.c
                 edge_utils.c
+                sn_utils.c
                 wire.c
                 minilzo.c
                 twofish.c
