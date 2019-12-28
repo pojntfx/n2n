@@ -3,6 +3,7 @@
 
 #define HASH_FIND_COMMUNITY(head, name, out) HASH_FIND_STR(head, name, out)
 #define N2N_SN_LPORT_DEFAULT 7654
+#define N2N_SN_PKTBUF_SIZE 2048
 
 typedef struct sn_stats
 {
@@ -55,5 +56,27 @@ extern int try_broadcast(n2n_sn_t *sss,
 extern int init_sn(n2n_sn_t *sss);
 
 extern void deinit_sn(n2n_sn_t *sss);
+
+extern uint16_t reg_lifetime(n2n_sn_t *sss);
+
+extern int update_edge(n2n_sn_t *sss,
+                       const n2n_mac_t edgeMac,
+                       struct sn_community *comm,
+                       const n2n_sock_t *sender_sock,
+                       time_t now);
+
+extern int process_mgmt(n2n_sn_t *sss,
+                        const struct sockaddr_in *sender_sock,
+                        const uint8_t *mgmt_buf,
+                        size_t mgmt_size,
+                        time_t now);
+
+extern int process_udp(n2n_sn_t *sss,
+                       const struct sockaddr_in *sender_sock,
+                       const uint8_t *udp_buf,
+                       size_t udp_size,
+                       time_t now);
+
+extern int run_loop(n2n_sn_t *sss, int *keep_running);
 
 #endif //N2N_SN_UTILS_H
