@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "n2n.h"
 
 #define N2N_SN_MGMT_PORT 5645
@@ -11,7 +10,7 @@ int main()
     sn_init(&sss_node);
 
     sss_node.lport = 1234;
-    sss_node.daemon = 0; // Don't daemonize
+    sss_node.daemon = 0;
 
     sss_node.sock = open_socket(sss_node.lport, 1);
     if (-1 == sss_node.sock)
