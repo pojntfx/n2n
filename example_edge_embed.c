@@ -9,13 +9,6 @@ int main()
     n2n_edge_t *eee;
     int rc;
 
-    char *device_mac = "DE:AD:BE:EF:01:10"; // Set mac address
-    char *ip_addr = "10.0.0.1";             // Set ip address
-    char *ip_mode = "static";               // IP mode; static|dhcp
-    int mtu = DEFAULT_MTU;                  // MTU to use
-    char *netmask = "255.255.255.0";        // Netmask to use
-    char *tuntap_dev_name = "edge0";        // Name of the device to use
-
     edge_init_conf_defaults(&conf);
     conf.allow_p2p = 1;                                                                      // Whether to allow peer-to-peer communication
     conf.allow_routing = 1;                                                                  // Whether to allow the edge to route packets to other edges
@@ -37,7 +30,13 @@ int main()
         return -1;
     }
 
-    if (tuntap_open(&tuntap, tuntap_dev_name, ip_mode, ip_addr, netmask, device_mac, mtu) < 0)
+    if (tuntap_open(&tuntap,
+                    "edge0",             // Name of the device to create
+                    "static",            // IP mode; static|dhcp
+                    "10.0.0.1",          // Set ip address
+                    "255.255.255.0",     // Netmask to use
+                    "DE:AD:BE:EF:01:10", // Set mac address
+                    DEFAULT_MTU) < 0)    // MTU to use
     {
         return -1;
     }
