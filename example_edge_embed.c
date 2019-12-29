@@ -1,6 +1,6 @@
 #include "n2n.h"
 
-static int keep_on_running;
+static int keep_running;
 
 int main()
 {
@@ -47,8 +47,8 @@ int main()
         exit(1);
     }
 
-    keep_on_running = 1;
-    rc = run_edge_loop(eee, &keep_on_running);
+    keep_running = 1;
+    rc = run_edge_loop(eee, &keep_running);
 
     edge_term(eee);
     tuntap_close(&tuntap);
