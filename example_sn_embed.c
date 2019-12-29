@@ -8,9 +8,8 @@ int main()
     int rc;
 
     sn_init(&sss_node);
-
-    sss_node.lport = 1234;
-    sss_node.daemon = 0;
+    sss_node.daemon = 0;   // Whether to daemonize
+    sss_node.lport = 1234; // Main UDP listen port
 
     sss_node.sock = open_socket(sss_node.lport, 1);
     if (-1 == sss_node.sock)
@@ -18,7 +17,7 @@ int main()
         exit(-2);
     }
 
-    sss_node.mgmt_sock = open_socket(5645, 0);
+    sss_node.mgmt_sock = open_socket(5645, 0); // Main UDP management port
     if (-1 == sss_node.mgmt_sock)
     {
         exit(-2);
