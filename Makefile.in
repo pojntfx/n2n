@@ -63,6 +63,7 @@ endif
 APPS=edge
 APPS+=supernode
 APPS+=example_edge_embed_quick_edge_init
+APPS+=example_edge_embed
 APPS+=example_sn_embed
 
 DOCS=edge.8.gz supernode.1.gz n2n.7.gz
@@ -80,6 +81,9 @@ supernode: sn.c $(N2N_LIB) n2n.h Makefile
 	$(CC) $(CFLAGS) $< $(N2N_LIB) $(LIBS_SN) -o $@
 
 example_edge_embed_quick_edge_init: example_edge_embed_quick_edge_init.c $(N2N_LIB) n2n.h
+	$(CC) $(CFLAGS) $< $(N2N_LIB) $(LIBS_EDGE) -o $@
+
+example_edge_embed: example_edge_embed.c $(N2N_LIB) n2n.h
 	$(CC) $(CFLAGS) $< $(N2N_LIB) $(LIBS_EDGE) -o $@
 
 example_sn_embed: example_sn_embed.c $(N2N_LIB) n2n.h
