@@ -7,6 +7,7 @@ config.*
 Makefile
 autom4te.cache
 edge
+example_edge_embed_quick_edge_init
 example_edge_embed
 example_sn_embed
 supernode
