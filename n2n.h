@@ -134,10 +134,6 @@ typedef struct ether_hdr ether_hdr_t;
 #define N2N_IFNAMSIZ            16 /* 15 chars * NULL */
 #endif
 
-#define N2N_NETMASK_STR_SIZE    16 /* dotted decimal 12 numbers + 3 dots */
-#define N2N_MACNAMSIZ           18 /* AA:BB:CC:DD:EE:FF + NULL*/
-#define N2N_IF_MODE_SIZE        16 /* static | dhcp */
-
 #ifndef WIN32
 typedef struct tuntap_dev {
   int           fd;
@@ -258,21 +254,6 @@ struct sn_community
 
     UT_hash_handle hh; /* makes this structure hashable */
 };
-
-typedef struct n2n_priv_config {
-  char                tuntap_dev_name[N2N_IFNAMSIZ];
-  char                ip_mode[N2N_IF_MODE_SIZE];
-  char                ip_addr[N2N_NETMASK_STR_SIZE];
-  char                netmask[N2N_NETMASK_STR_SIZE];
-  char                device_mac[N2N_MACNAMSIZ];
-  int                 mtu;
-  uint8_t             got_s;
-  uint8_t             daemon;
-#ifndef WIN32
-  uid_t               userid;
-  gid_t               groupid;
-#endif
-} n2n_priv_config_t;
 
 /* ************************************** */
 
